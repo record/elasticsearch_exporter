@@ -221,10 +221,11 @@ type NodeStatsOSSwapResponse struct {
 }
 
 type NodeStatsOSCPUResponse struct {
-	Sys   int64 `json:"sys"`
-	User  int64 `json:"user"`
-	Idle  int64 `json:"idle"`
-	Steal int64 `json:"stolen"`
+	Sys     int64              `json:"sys"`
+	User    int64              `json:"user"`
+	Idle    int64              `json:"idle"`
+	Steal   int64              `json:"stolen"`
+	LoadAvg map[string]float64 `json:"load_average"`
 }
 
 // NodeStatsProcessResponse is a representation of a process statistics, memory consumption, cpu usage, open file descriptors

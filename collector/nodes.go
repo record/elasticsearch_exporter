@@ -613,6 +613,35 @@ func NewNodes(logger log.Logger, client *http.Client, url *url.URL, all bool) *N
 			{
 				Type: prometheus.GaugeValue,
 				Desc: prometheus.NewDesc(
+					prometheus.BuildFQName(namespace, "os", "load_average"),
+					"1m Load Average of OS",
+					defaultNodeLabels, nil,
+				),
+				Value: func(node NodeStatsNodeResponse) float64 {
+					// ES 5
+					if load, ok := node.OS.CPU.LoadAvg["1m"]; ok {
+						return load
+					}
+
+					// ES 2
+					var load float64
+					if err := json.Unmarshal(node.OS.LoadAvg, &load); err == nil {
+						return load
+					}
+
+					// ES 1
+					var loads [3]float64
+					if err := json.Unmarshal(node.OS.LoadAvg, &loads); err == nil {
+						return loads[0]
+					}
+
+					return 0
+				},
+				Labels: defaultNodeLabelValues,
+			},
+			{
+				Type: prometheus.GaugeValue,
+				Desc: prometheus.NewDesc(
 					prometheus.BuildFQName(namespace, "process", "cpu_percent"),
 					"Percent CPU used by process",
 					defaultNodeLabels, nil,
