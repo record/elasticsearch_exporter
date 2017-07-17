@@ -642,6 +642,18 @@ func NewNodes(logger log.Logger, client *http.Client, url *url.URL, all bool) *N
 			{
 				Type: prometheus.GaugeValue,
 				Desc: prometheus.NewDesc(
+					prometheus.BuildFQName(namespace, "os", "mem_used_percent"),
+					"OS memory in used (percentage)",
+					defaultNodeLabels, nil,
+				),
+				Value: func(node NodeStatsNodeResponse) float64 {
+					return float64(node.OS.Mem.UsedPercent)
+				},
+				Labels: defaultNodeLabelValues,
+			},
+			{
+				Type: prometheus.GaugeValue,
+				Desc: prometheus.NewDesc(
 					prometheus.BuildFQName(namespace, "process", "cpu_percent"),
 					"Percent CPU used by process",
 					defaultNodeLabels, nil,
