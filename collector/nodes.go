@@ -614,7 +614,7 @@ func NewNodes(logger log.Logger, client *http.Client, url *url.URL, all bool) *N
 				Type: prometheus.GaugeValue,
 				Desc: prometheus.NewDesc(
 					prometheus.BuildFQName(namespace, "os", "load_average"),
-					"1m Load Average of OS",
+					"OS 1m load average",
 					defaultNodeLabels, nil,
 				),
 				Value: func(node NodeStatsNodeResponse) float64 {

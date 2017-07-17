@@ -110,6 +110,7 @@ elasticsearch_exporter --help
 | elasticsearch_jvm_memory_committed_bytes                   | gauge     | 2            | JVM memory currently committed by area
 | elasticsearch_jvm_memory_max_bytes                         | gauge     | 1            | JVM memory max
 | elasticsearch_jvm_memory_used_bytes                        | gauge     | 2            | JVM memory currently used by area
+| elasticsearch_os_load_average                              | gauge     | 1            | OS 1m load average
 | elasticsearch_process_cpu_percent                          | gauge     | 1            | Percent CPU used by process
 | elasticsearch_process_cpu_time_seconds_sum                 | counter   | 3            | Process CPU time in seconds
 | elasticsearch_process_mem_resident_size_bytes              | gauge     | 1            | Resident memory in use by process in bytes
